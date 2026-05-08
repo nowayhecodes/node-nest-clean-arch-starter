@@ -37,7 +37,6 @@ processors:
         action: delete
 
 exporters:
-
   # ── Local development: Jaeger ──────────────────────────────────────────────
   # Traces are visualised at http://localhost:16686
   otlp/jaeger:
@@ -53,7 +52,7 @@ exporters:
 
   # ── Debug (stdout) — useful during local development ──────────────────────
   debug:
-    verbosity: normal   # set to "detailed" for full payload dumps
+    verbosity: normal # set to "detailed" for full payload dumps
 
   # ── Datadog ───────────────────────────────────────────────────────────────
   # Docs: https://docs.datadoghq.com/opentelemetry/collector_exporter/
@@ -106,7 +105,6 @@ exporters:
 
 service:
   pipelines:
-
     traces:
       receivers: [otlp]
       processors: [memory_limiter, attributes/redact, batch]

@@ -31,4 +31,4 @@ export default {
       branches: 100,
     },
   },
-};
+}

@@ -13,7 +13,6 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 services:
-
   # ── Application ─────────────────────────────────────────────────────────────
   app:
     build:
@@ -23,7 +22,7 @@ services:
     container_name: nest_app
     restart: unless-stopped
     ports:
-      - "${PORT:-3000}:3000"
+      - '${PORT:-3000}:3000'
     env_file:
       - .env
     environment:
@@ -33,7 +32,7 @@ services:
       TENANT_DB_HOST: postgres
       REDIS_HOST: redis
       # OpenTelemetry — point to the local collector
-      OTEL_ENABLED: "true"
+      OTEL_ENABLED: 'true'
       OTEL_SERVICE_NAME: nest-app
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
     depends_on:
@@ -58,11 +57,11 @@ services:
       # Tenant application DBs are created at runtime by the app.
       POSTGRES_DB: ${DB_NAME:-tenant_manager}
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - '${DB_PORT:-5432}:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-postgres}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -80,11 +79,11 @@ services:
       --maxmemory 128mb
       --maxmemory-policy allkeys-lru
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - '${REDIS_PORT:-6379}:6379'
     volumes:
       - redis_data:/data
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_PASS:-redis_secret}", "ping"]
+      test: ['CMD', 'redis-cli', '-a', '${REDIS_PASS:-redis_secret}', 'ping']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -98,13 +97,13 @@ services:
     image: otel/opentelemetry-collector-contrib:latest
     container_name: nest_otel_collector
     restart: unless-stopped
-    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    command: ['--config=/etc/otelcol-contrib/config.yaml']
     volumes:
       - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml:ro
     ports:
-      - "4317:4317"   # OTLP gRPC receiver
-      - "4318:4318"   # OTLP HTTP receiver
-      - "8889:8889"   # Prometheus metrics scrape endpoint
+      - '4317:4317' # OTLP gRPC receiver
+      - '4318:4318' # OTLP HTTP receiver
+      - '8889:8889' # Prometheus metrics scrape endpoint
     environment:
       # Pass backend credentials from host environment — they are referenced
       # inside otel-collector-config.yaml with ${VAR_NAME} syntax.
@@ -125,10 +124,10 @@ services:
     container_name: nest_jaeger
     restart: unless-stopped
     environment:
-      COLLECTOR_OTLP_ENABLED: "true"
+      COLLECTOR_OTLP_ENABLED: 'true'
     ports:
-      - "16686:16686"   # Jaeger UI
-      - "14317:4317"    # OTLP gRPC (host-side offset to avoid conflict with collector)
+      - '16686:16686' # Jaeger UI
+      - '14317:4317' # OTLP gRPC (host-side offset to avoid conflict with collector)
     networks:
       - backend
 

@@ -3,17 +3,18 @@
     <mj-raw>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet" />
     </mj-raw>
-    <mj-title>
-      Email Confirmation - Goal
-    </mj-title>
-    <mj-preview>
-      Welcome to Goal! To complete your registration...
-    </mj-preview>
+    <mj-title> Email Confirmation - Goal </mj-title>
+    <mj-preview> Welcome to Goal! To complete your registration... </mj-preview>
   </mj-head>
   <mj-body background-color="#E4E8ED">
     <mj-section>
       <mj-column width="552px">
-        <mj-image width="116px" height="49px" src="https://softo-boilerplate-assets-dev.s3.amazonaws.com/images/logo.png" alt="Goal logo">
+        <mj-image
+          width="116px"
+          height="49px"
+          src="https://softo-boilerplate-assets-dev.s3.amazonaws.com/images/logo.png"
+          alt="Goal logo"
+        >
         </mj-image>
       </mj-column>
     </mj-section>
@@ -22,26 +23,71 @@
         <mj-text font-family="Verdana" font-size="24px" line-height="32px" font-weight="400" color="#191C1A">
           Hello {{userName}}
         </mj-text>
-        <mj-text font-size="14px" font-family="Verdana" font-weight="400" line-height="20px" padding-top="24px" color="#191C1A">
+        <mj-text
+          font-size="14px"
+          font-family="Verdana"
+          font-weight="400"
+          line-height="20px"
+          padding-top="24px"
+          color="#191C1A"
+        >
           Welcome to Goal!
         </mj-text>
         <mj-text font-size="14px" font-family="Verdana" font-weight="400" line-height="20px" color="#191C1A">
-          To complete your registration, please confirm your email address by clicking on the link below. This step is essential to ensure your safety and complete access to the platform.
+          To complete your registration, please confirm your email address by clicking on the link below. This step is
+          essential to ensure your safety and complete access to the platform.
         </mj-text>
-        <mj-button padding-top="32px" font-family="Montserrat, sans-serif" font-weight="600" font-size="12px" padding="11px 24px" border-radius="7px" height="32px" width="148px" background-color="#FF6600" href="{{linkUrl}}" target="_blank">
+        <mj-button
+          padding-top="32px"
+          font-family="Montserrat, sans-serif"
+          font-weight="600"
+          font-size="12px"
+          padding="11px 24px"
+          border-radius="7px"
+          height="32px"
+          width="148px"
+          background-color="#FF6600"
+          href="{{linkUrl}}"
+          target="_blank"
+        >
           Confirm email
         </mj-button>
       </mj-column>
     </mj-section>
     <mj-section>
       <mj-column width="480px">
-        <mj-text font-size="12px" font-family="Verdana" font-weight="400" line-height="16px" color="#5E6170" align="center" letter-spacing="0.25px">
+        <mj-text
+          font-size="12px"
+          font-family="Verdana"
+          font-weight="400"
+          line-height="16px"
+          color="#5E6170"
+          align="center"
+          letter-spacing="0.25px"
+        >
           If you haven’t registered on Goal, please ignore this email.
         </mj-text>
-        <mj-text font-size="12px" font-family="Verdana" font-weight="400" line-height="16px" color="#5E6170" align="center" letter-spacing="0.25px">
+        <mj-text
+          font-size="12px"
+          font-family="Verdana"
+          font-weight="400"
+          line-height="16px"
+          color="#5E6170"
+          align="center"
+          letter-spacing="0.25px"
+        >
           This email was sent to {{userEmail}}
         </mj-text>
-        <mj-text font-size="14px" font-family="Verdana" font-weight="400" line-height="20px" padding-top="20px" color="#707070" align="center" letter-spacing="0.25px">
+        <mj-text
+          font-size="14px"
+          font-family="Verdana"
+          font-weight="400"
+          line-height="20px"
+          padding-top="20px"
+          color="#707070"
+          align="center"
+          letter-spacing="0.25px"
+        >
           © 2024 Goal - All rights reserved.
         </mj-text>
       </mj-column>
