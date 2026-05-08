@@ -1,0 +1,27 @@
+export namespace SharedProviderEnum {
+  export const COMMANDS = {
+    TENANT_REGISTER_COMMAND: Symbol('TENANT_REGISTER_COMMAND'),
+  }
+  export const QUERIES = {
+    GET_TENANT_BY_ID: Symbol('GET_TENANT_BY_ID'),
+    GET_TENANT_BY_HEADER: Symbol('GET_TENANT_BY_HEADER'),
+  } as const
+  export const REPOSITORIES = {
+    TENANT_REPOSITORY: Symbol('TENANT_REPOSITORY'),
+    USER_REPOSITORY: Symbol('USER_REPOSITORY'),
+  } as const
+  export const TENANT_MANAGER_DATABASE_CONNECTION = Symbol('TENANT_MANAGER_DATABASE_CONNECTION')
+  export const APPLICATION_DATABASE_CONNECTION = Symbol('APPLICATION_DATABASE_CONNECTION')
+  export const LOGIN_POLICY = Symbol('LOGIN_POLICY')
+  export const CRYPTOGRAPHY = Symbol('CRYPTOGRAPHY')
+  export const CONNECTION_MANAGER = Symbol('CONNECTION_MANAGER')
+  export const HASH_GENERATOR = Symbol('HASH_GENERATOR')
+  export const ACCESS_TOKEN_GENERATOR = Symbol('ACCESS_TOKEN_GENERATOR')
+  export const REFRESH_TOKEN_GENERATOR = Symbol('REFRESH_TOKEN_GENERATOR')
+  export const SECURITY_TOKEN_GENERATOR = Symbol('SECURITY_TOKEN_GENERATOR')
+  export const JWT_STRATEGY = Symbol('JWT_STRATEGY')
+  export const EVENT_HANDLER = Symbol('EVENT_HANDLER')
+  export const EMAIL_HANDLER = Symbol('EMAIL_HANDLER')
+  export const PUBLIC_FILE_SYSTEM = Symbol('PUBLIC_FILE_SYSTEM')
+  export const PRIVATE_FILE_SYSTEM = Symbol('PRIVATE_FILE_SYSTEM')
+}

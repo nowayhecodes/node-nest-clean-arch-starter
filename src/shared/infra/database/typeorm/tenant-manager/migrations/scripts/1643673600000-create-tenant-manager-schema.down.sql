@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS public.template CASCADE;
+DROP TABLE IF EXISTS public.tenants CASCADE;
+DROP TABLE IF EXISTS public.credentials CASCADE;
+DROP TABLE IF EXISTS public.buckets CASCADE;

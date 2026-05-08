@@ -1,0 +1,39 @@
+# Build artifacts
+dist/
+node_modules/
+
+# Source maps
+*.js.map
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Version control
+.git/
+.gitignore
+
+# Editor / OS
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Test output
+coverage/
+junit.xml
+
+# Documentation
+README.md
+CODEBASE.md
+*.md
+
+# Docker files (no need to copy back into image)
+Dockerfile
+.dockerignore
+docker-compose*.yaml
+
+# Logs
+*.log
+logs/

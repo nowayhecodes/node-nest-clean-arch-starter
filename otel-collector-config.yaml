@@ -1,0 +1,126 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# OpenTelemetry Collector — Contrib edition
+#
+# Signal flow:
+#   App ─OTLP HTTP/gRPC─▶ Collector ─▶ backend(s)
+#
+# To target a specific APM / observability platform, uncomment the matching
+# exporter block in the `exporters` section and wire it into the relevant
+# `service.pipelines.*` exporters list.
+# ─────────────────────────────────────────────────────────────────────────────
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  memory_limiter:
+    check_interval: 5s
+    limit_mib: 256
+    spike_limit_mib: 64
+
+  batch:
+    timeout: 1s
+    send_batch_size: 1024
+
+  # Redact sensitive attributes before they leave the collector.
+  # Add any field names that must never be forwarded to a third-party backend.
+  attributes/redact:
+    actions:
+      - key: http.request.header.authorization
+        action: delete
+      - key: http.request.header.cookie
+        action: delete
+
+exporters:
+
+  # ── Local development: Jaeger ──────────────────────────────────────────────
+  # Traces are visualised at http://localhost:16686
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+
+  # ── Local development: Prometheus scrape endpoint ─────────────────────────
+  # Metrics are exposed at http://localhost:8889/metrics
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    namespace: nestapp
+
+  # ── Debug (stdout) — useful during local development ──────────────────────
+  debug:
+    verbosity: normal   # set to "detailed" for full payload dumps
+
+  # ── Datadog ───────────────────────────────────────────────────────────────
+  # Docs: https://docs.datadoghq.com/opentelemetry/collector_exporter/
+  #
+  # datadog:
+  #   api:
+  #     site: datadoghq.com          # or datadoghq.eu, us3.datadoghq.com …
+  #     key: "${DATADOG_API_KEY}"
+
+  # ── Elastic APM / Elasticsearch ───────────────────────────────────────────
+  # Docs: https://www.elastic.co/guide/en/apm/guide/current/open-telemetry.html
+  #
+  # otlphttp/elastic:
+  #   endpoint: https://<your-cluster>.apm.us-east-1.aws.elastic-cloud.com
+  #   headers:
+  #     Authorization: "Bearer ${ELASTIC_APM_SECRET_TOKEN}"
+
+  # ── New Relic ─────────────────────────────────────────────────────────────
+  # Docs: https://docs.newrelic.com/docs/more-integrations/open-source-telemetry-integrations/opentelemetry/opentelemetry-setup/
+  #
+  # otlphttp/newrelic:
+  #   endpoint: https://otlp.nr-data.net
+  #   headers:
+  #     api-key: "${NEW_RELIC_LICENSE_KEY}"
+
+  # ── Grafana Cloud (Tempo + Mimir + Loki) ──────────────────────────────────
+  # Docs: https://grafana.com/docs/grafana-cloud/send-data/otlp/
+  #
+  # otlphttp/grafana:
+  #   endpoint: https://otlp-gateway-<region>.grafana.net/otlp
+  #   headers:
+  #     Authorization: "Basic ${GRAFANA_CLOUD_TOKEN}"   # base64(instance_id:api_key)
+
+  # ── Sentry ────────────────────────────────────────────────────────────────
+  # Docs: https://docs.sentry.io/platforms/javascript/guides/node/opentelemetry/
+  # Note: Sentry's SDK wraps OTEL internally; no separate exporter needed when
+  # using the Sentry Node SDK directly. If you want collector-level forwarding:
+  #
+  # otlphttp/sentry:
+  #   endpoint: https://o<org>.ingest.sentry.io/api/<project>/envelope/
+  #   headers:
+  #     sentry-trace: "${SENTRY_DSN}"
+
+  # ── Honeycomb ─────────────────────────────────────────────────────────────
+  #
+  # otlphttp/honeycomb:
+  #   endpoint: https://api.honeycomb.io
+  #   headers:
+  #     x-honeycomb-team: "${HONEYCOMB_API_KEY}"
+
+service:
+  pipelines:
+
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, attributes/redact, batch]
+      exporters: [otlp/jaeger, debug]
+      # To add Datadog: exporters: [otlp/jaeger, datadog, debug]
+
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [prometheus, debug]
+      # To add New Relic: exporters: [prometheus, otlphttp/newrelic, debug]
+
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, attributes/redact, batch]
+      exporters: [debug]
+      # To add Elastic: exporters: [otlphttp/elastic, debug]

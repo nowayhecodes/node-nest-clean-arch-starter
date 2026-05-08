@@ -1,0 +1,44 @@
+<mjml>
+  <mj-head>
+    <mj-raw>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet" />
+    </mj-raw>
+    <mj-title>
+      Softo - Seja bem vindo a plataforma.
+    </mj-title>
+    <mj-preview>
+      Agora você pode desfrutar de todas...
+    </mj-preview>
+  </mj-head>
+  <mj-body background-color="#F2F2F2">
+    <mj-section>
+      <mj-column width="552px">
+        <mj-image width="116px" height="49px" src="https://softo-boilerplate-assets-dev.s3.amazonaws.com/images/logo.png" alt="Goal logo">
+        </mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0px">
+      <mj-column width="552px" padding="64px 32px" border-radius="16px" background-color="#FFF">
+        <mj-text font-family="Verdana" font-size="24px" font-weight="400" color="#191C1A">
+          Seja bem vindo a plataforma.
+        </mj-text>
+        <mj-text font-size="14px" font-family="Verdana" font-weight="400" line-height="20px" padding-top="24px" color="#191C1A">
+          Agora você pode desfrutar de todas as funcionalidades acessando com seu usuário e senha clicando no link abaixo.
+        </mj-text>
+        <mj-button padding-top="32px" font-family="Montserrat, sans-serif" font-weight="600" font-size="12px" padding="11px 24px" border-radius="4px" height="32px" background-color="#FF6600" href="{{linkUrl}}">
+          Ir para o login
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="12px" font-family="Verdana" font-weight="400" line-height="16px" color="#5E6170" align="center">
+          Este e-mail foi enviado para {{userEmail}}
+        </mj-text>
+        <mj-text font-size="14px" font-family="Verdana" font-weight="400" line-height="20px" padding-top="24px" color="#5E6170" align="center">
+          © 2022 Goal - Todos os direitos reservados
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
